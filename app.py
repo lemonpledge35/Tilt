@@ -1,11 +1,13 @@
 import numpy as np
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import datetime
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-	return render_template('home.html')
+	t = datetime.datetime.now().strftime("%H:%M:%S")
+	return render_template('home.html',current_time=t)
 
 @app.route("/test/")
 def rest():
