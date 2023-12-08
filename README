@@ -1,0 +1,8 @@
+This is a project to run a server via flask that collects data from a Tilt hydrometer, logs it into a brew file, and displays it on a webpage on the local server.
+
+To run the server to any device on the local network, run:
+
+	Flask run --host=0.0.0.0
+
+
+
