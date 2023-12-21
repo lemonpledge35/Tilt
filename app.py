@@ -4,6 +4,7 @@ import datetime
 import time
 import threading
 import read
+import glob
 
 global brewing
 global beer
@@ -47,6 +48,10 @@ def run():
         
         
 
+
+def get_data_files():
+    return glob('data/*')
+
 app = Flask(__name__)
 
 @app.route("/", methods = ['GET','POST'])
@@ -68,13 +73,16 @@ def home():
             bs = f'Brewing {beer.name}'
         else:
             bs = 'Not Brewing'
-        return render_template('home.html',temp=t,sg=s,brewing_status=bs)
+        return render_template('home.html',temp=t,sg=s,brewing_status=bs,
+                               files=get_data_files())
     
     if request.method == 'GET':
         if brewing:
-            return render_template('home.html',temp=t,sg = s,brewing_status = 'Brewing')
+            return render_template('home.html',temp=t,sg = s,
+                                   brewing_status = 'Brewing',files=get_data_files())
         else:
-            return render_template('home.html',temp=t,sg=s,brewing_status='Not Brewing')
+            return render_template('home.html',temp=t,sg=s,
+                                   brewing_status='Not Brewing',files=get_data_files())
     
 
 

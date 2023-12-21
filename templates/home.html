@@ -116,10 +116,13 @@
         
 <form>
              <label for="previousBrews">Select Previous Brew:</label>
-             <select id="previousBrews" name="previousBrews">
-                 <option value="brew1">Brew 1</option>
-                 <option value="brew2">Brew 2</option>
-                 <option value="brew3">Brew 3</option>
+             <select id="files" name="files">
+             {% for file in files%}
+             
+                 <option value="{{ file }}">{{file }} </option>
+            {% endfor%}
+            </select>
+            <input type="submit" value="Plot">
                  </form>
             </div>
 
