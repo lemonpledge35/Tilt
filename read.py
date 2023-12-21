@@ -18,10 +18,20 @@ def callback(bt_addr, rssi, packet, additional_info):
     temp = temp_temp
     sg = sg_temp/1000
 
-scanner = BeaconScanner(callback, device_filter=IBeaconFilter(uuid="a495bb50-c5b1-4b44-b512-1370f02d74de"))
+#scanner = BeaconScanner(callback, device_filter=IBeaconFilter(uuid="a495bb50-c5b1-4b44-b512-1370f02d74de"))
 
-print('starting scanner')
-
+def get_values():
+    global temp
+    global sg
+    temp = 0
+    sg = -10
+    scanner = BeaconScanner(callback, device_filter=IBeaconFilter(uuid="a495bb50-c5b1-4b44-b512-1370f02d74de"))
+    scanner.start()
+    while sg < 0:
+        pass
+    scanner.stop
+    return temp,sg
+'''
 temp = 0
 sg = -10
 scanner.start()
@@ -33,3 +43,4 @@ print(f'Time: {time}')
 print(f'Temperature: {temp}')
 print(f'Specific Gravity: {sg}')
 
+'''
