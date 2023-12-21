@@ -21,18 +21,21 @@ def get_values():
 
 def begin_brew(fn):
     global brewing
+    global beer
     brewing = True
     beer = Brew(fn)
-    return beer
+    run()
 
 def end_brew():
     global brewing
     brewing = False
     
-def run(b):
+def run():
     global brewing
     global beer
     file_name = f'data/{beer.name}.txt'
+    open(file_name,'w')
+    close(file_name)
     while brewing:
         temp, sg = read.get_values()
         time = datetime.datetime.now()
@@ -53,7 +56,6 @@ def home():
     if request.method == 'POST':
         if 'beginbrew' in request.form and not brewing:
             beer_name = request.form['beerName']
-            beer = begin_brew(beer_name)
         elif 'endbrew' in request.form and brewing:
             end_brew()
 
@@ -74,5 +76,7 @@ def home():
 
 
 @app.route("/test/")
-def rest():
+def test():
+    with open('test.txt','w') as f:
+        f.write('apple')
 	return render_template('test.html')
