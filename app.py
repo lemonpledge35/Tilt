@@ -1,6 +1,7 @@
 import numpy as np
 from flask import Flask, render_template, request
 import datetime
+import time
 import threading
 import read
 
@@ -24,7 +25,8 @@ def begin_brew(fn):
     global beer
     brewing = True
     beer = Brew(fn)
-    run()
+    run_thread = threading.Thread(target=run)
+    run_thread.start()
 
 def end_brew():
     global brewing
@@ -34,14 +36,14 @@ def run():
     global brewing
     global beer
     file_name = f'data/{beer.name}.txt'
-    open(file_name,'w')
-    close(file_name)
+    f = open(file_name,'w')
+    f.close()
     while brewing:
         temp, sg = read.get_values()
-        time = datetime.datetime.now()
+        time_now = datetime.datetime.now()
         with open(file_name,'a') as f:
-            f.write(time,',',temp,',',sg,',')
-        time.sleep(600)
+            f.write(f'{time_now},{temp},{sg}\n')
+        time.sleep(10)
         
         
 
@@ -56,6 +58,7 @@ def home():
     if request.method == 'POST':
         if 'beginbrew' in request.form and not brewing:
             beer_name = request.form['beerName']
+            begin_brew(beer_name)
         elif 'endbrew' in request.form and brewing:
             end_brew()
 
@@ -77,6 +80,4 @@ def home():
 
 @app.route("/test/")
 def test():
-    with open('test.txt','w') as f:
-        f.write('apple')
-	return render_template('test.html')
+    return render_template('test.html')
