@@ -27,8 +27,11 @@ def get_values():
     sg = -10
     scanner = BeaconScanner(callback, device_filter=IBeaconFilter(uuid="a495bb50-c5b1-4b44-b512-1370f02d74de"))
     scanner.start()
+    i = 0
     while sg < 0:
-        pass
+        i += 1
+        if i > 20:
+            return 0,0
     scanner.stop
     return temp,sg
 '''
