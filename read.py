@@ -30,7 +30,7 @@ def get_values():
     i = 0
     while sg < 0:
         i += 1
-        sleep(1)
+        time.sleep(1)
         if i > 5:
             print('Time out on Tilt read')
             return 0,0
