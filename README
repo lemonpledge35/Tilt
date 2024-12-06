@@ -1,5 +1,7 @@
 This is a project to run a server via flask that collects data from a Tilt hydrometer, logs it into a brew file, and displays it on a webpage on the local server. If the tilt is not in water, too far, or dead, the read will time out at 5 seconds and give values of 0 for temperature and gravity.
 
+Raspberry pi password: pennypoodle
+
 To run the server to any device on the local network, run:
 
 	flask run --host=0.0.0.0
