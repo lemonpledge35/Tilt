@@ -30,7 +30,9 @@ def get_values():
     i = 0
     while sg < 0:
         i += 1
-        if i > 20:
+        sleep(1)
+        if i > 5:
+            print('Time out on Tilt read')
             return 0,0
     scanner.stop
     return temp,sg
